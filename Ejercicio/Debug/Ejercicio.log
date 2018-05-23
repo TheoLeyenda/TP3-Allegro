@@ -1,4 +1,5 @@
 ﻿  Ejer.cpp
+c:\users\administrador\desktop\tp3-allegro\ejercicio\ejer.cpp(21): warning C4101: 'ventana': variable local sin referencia
   Ejercicio.vcxproj -> C:\Users\Administrador\Desktop\TP3-Allegro\Debug\Ejercicio.exe
   Ejercicio.vcxproj -> C:\Users\Administrador\Desktop\TP3-Allegro\Debug\Ejercicio.pdb (Partial PDB)
   C:\Users\Administrador\Desktop\TP3-Allegro\Allegro\allegro_5.1.12_x86\bin\allegro-5.1.dll
