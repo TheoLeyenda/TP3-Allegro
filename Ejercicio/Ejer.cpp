@@ -8,6 +8,7 @@
 #include "allegro5/allegro_native_dialog.h"
 #include "allegro5/allegro_primitives.h"
 #include "Jugador.h"
+#include "Enemigo.h"
 using namespace std;
 int main(int argc, char** argv) {
 	bool gameOver = false;
@@ -20,6 +21,7 @@ int main(int argc, char** argv) {
 	ALLEGRO_EVENT_QUEUE *event_queue;
 
 	Jugador *player = new Jugador();
+	Enemigo *Enemy = new Enemigo(200,200,36,38);
 	
 	//  Inicia allegro5, esto es necesario para realizar cualquier
 	//  función de allegro
@@ -48,7 +50,8 @@ int main(int argc, char** argv) {
 
 	//jugador1 = al_load_bitmap("../Sprite/JugadoOP1.png");
 	player->loadImage();
-	if (!player->CheckLoadImage(display)) 
+	Enemy->loadImage();
+	if (!player->CheckLoadImage(display))
 	{
 		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
 			NULL, ALLEGRO_MESSAGEBOX_ERROR);
@@ -68,7 +71,7 @@ int main(int argc, char** argv) {
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		
 		player->draw(player->getBitmap(), 0);
-
+		Enemy->draw(Enemy->getBitmap(), 0);
 		//  Intercambia los buffers, ahora la ventana mostrará tendrá fondo
 		//  de color negro. Si minimiza la ventana y la vuelve restaurar, se
 		//  dará cuenta que ahora la pantalla muestra lo que estuve detrás.
@@ -82,21 +85,26 @@ int main(int argc, char** argv) {
 		switch (ev.keyboard.keycode)
 		{
 			case ALLEGRO_KEY_UP:
-				player->setY(player->getY() - 1);
+				player->setY(player->getY() - 2);
 				player->setImage(1);
 				break;
 			case ALLEGRO_KEY_DOWN:
-				player->setY(player->getY() + 1);
+				player->setY(player->getY() + 2);
 				player->setImage(4);
 				break;
 			case ALLEGRO_KEY_LEFT:
-				player->setX(player->getX() - 1);
+				player->setX(player->getX() - 2);
 				player->setImage(3);
 				break;
 			case ALLEGRO_KEY_RIGHT:
-				player->setX(player->getX() + 1);
+				player->setX(player->getX() + 2);
 				player->setImage(2);
 				break;
+		}
+		//coluciones
+		if (player->colicionEnemigo(Enemy->getW(), Enemy->getH(), Enemy->getX(), Enemy->getY()))
+		{
+
 		}
 	}
 	//  No olvidarnos de eliminar el contenido bajo el puntero de ventana,

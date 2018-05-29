@@ -120,9 +120,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ejer.cpp" />
+    <ClCompile Include="Enemigo.cpp" />
     <ClCompile Include="Jugador.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemigo.h" />
     <ClInclude Include="Jugador.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

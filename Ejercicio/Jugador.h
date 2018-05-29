@@ -34,6 +34,6 @@ public:
 	float getW();
 	void setRotacion(float _rotacion);
 	float getRotacion();
-	
+	bool colicionEnemigo(float W_enemy, float H_enemy, float X_enemy, float Y_enemy);
 };
 #endif
