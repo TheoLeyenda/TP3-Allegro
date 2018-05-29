@@ -6,6 +6,7 @@
 #include <allegro5/allegro_image.h>
 #include "allegro5/allegro_image.h"
 #include "allegro5/allegro_native_dialog.h"
+#include "Jugador.h"
 using namespace std;
 void input() {
 }
@@ -20,7 +21,8 @@ int main(int argc, char** argv) {
 	//  Crea un puntero a un ALLEGRO_DISPLAY
 	ALLEGRO_DISPLAY* ventana;
 	ALLEGRO_DISPLAY *display = NULL;
-	ALLEGRO_BITMAP  *jugador1 = NULL;
+	//ALLEGRO_BITMAP  *jugador1 = NULL;
+	Jugador *player = new Jugador();
 	
 	//  Inicia allegro5, esto es necesario para realizar cualquier
 	//  función de allegro
@@ -44,9 +46,10 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	jugador1 = al_load_bitmap("../Sprite/JugadoOP1.png");
-
-	if (!jugador1) {
+	//jugador1 = al_load_bitmap("../Sprite/JugadoOP1.png");
+	player->loadImage();
+	if (!player->CheckLoadImage(display)) 
+	{
 		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
 			NULL, ALLEGRO_MESSAGEBOX_ERROR);
 		al_destroy_display(display);
@@ -64,8 +67,8 @@ int main(int argc, char** argv) {
 		//  al_clear_to_color(...)
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
-		al_draw_bitmap(jugador1, 200, 200, 0);// me lo pociciona siempre en el 200 200 fijarse de poner dos variables para poder movel al personaje
-
+		//al_draw_bitmap(jugador1,200, 200,0);// me lo pociciona siempre en el 200 200 fijarse de poner dos variables para poder movel al personaje
+		player->draw(player->getBitmap(),0);
 		//  Intercambia los buffers, ahora la ventana mostrará tendrá fondo
 		//  de color negro. Si minimiza la ventana y la vuelve restaurar, se
 		//  dará cuenta que ahora la pantalla muestra lo que estuve detrás.
@@ -77,6 +80,7 @@ int main(int argc, char** argv) {
 	//  No olvidarnos de eliminar el contenido bajo el puntero de ventana,
 	//  esto eliminará a la ventana de la memoria.
 	al_destroy_display(display);
-	al_destroy_bitmap(jugador1);
+	//al_destroy_bitmap(jugador1);
+	delete player;
 	return 0;
 }
