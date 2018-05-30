@@ -1,8 +1,4 @@
-﻿  Ejer.cpp
-Ejer.cpp(17): warning C4101: 'ventana': variable local sin referencia
-  Enemigo.cpp
-  Jugador.cpp
-  Generando código
+﻿  Generando código
   All 42 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Generación de código finalizada
   Ejercicio.vcxproj -> C:\Users\Administrador\Desktop\TP3-Allegro\Release\Ejercicio.exe

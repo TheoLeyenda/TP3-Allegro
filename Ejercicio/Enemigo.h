@@ -17,10 +17,13 @@ private:
 	float y;
 	float h;
 	float w;
+	int diley;
 	int direcion;
+	float anchoPantalla;
+	float altoPantalla;
 public:
 	Enemigo();
-	Enemigo(float _x, float _y, float _w, float _h);
+	Enemigo(float _x, float _y, float _w, float _h, float _anchoPantalla, float _altoPantalla);
 	~Enemigo();
 	void loadImage();
 	bool CheckLoadImage(ALLEGRO_DISPLAY *_display);
@@ -36,7 +39,9 @@ public:
 	float getH();
 	float getW();
 	void movimiento();
-
-
+	void setDiley(int _diley);
+	int getDiley();
+	void setAnchoPantalla(float anchoPantalla);
+	float getAnchoPantalla();
 };
 #endif

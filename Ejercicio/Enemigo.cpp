@@ -14,16 +14,22 @@ Enemigo::Enemigo()
 	y = 0;
 	w = 36;
 	h = 38;
+	diley = 150;
 	srand(time(0));
+	anchoPantalla = 640;
+	altoPantalla = 480;
 }
-Enemigo::Enemigo(float _x, float _y, float _w, float _h)
+Enemigo::Enemigo(float _x, float _y, float _w, float _h,float _anchoPantalla, float _altoPantalla)
 {
 	bitmapJugador = NULL;
 	x = _x;
 	y = _y;
 	h = _h;
 	w = _w;
+	diley = 150;
 	srand(time(0));
+	anchoPantalla = _anchoPantalla;
+	altoPantalla = _altoPantalla;
 }
 
 Enemigo::~Enemigo()
@@ -114,21 +120,74 @@ float Enemigo::getH()
 void Enemigo::movimiento()
 {
 	int aux;
-	aux = rand() % 4 + 1;
-	setImage(aux);
+	if (diley >= 150)
+	{
+		aux = rand() % 4 + 1;
+		setImage(aux);
+		diley = 0;
+	}
+	diley++;
 	switch (direcion)
 	{
 		case 1:
-			y--;
+			//ANDA
+			if (y >=0)
+			{
+				y = y - 0.5;
+			}
+			else
+			{
+				diley = 150;
+			}
 			break;
 		case 2:
-			x++;
+			//ANDA
+			if (x <= anchoPantalla-w)
+			{
+				x = x + 0.5;
+			}
+			else
+			{
+				diley = 150;
+			}
 			break;
 		case 3:
-			x--;
+			//ANDA
+			if (x >= 0)
+			{
+				x = x - 0.5;
+			}
+			else
+			{
+				diley = 150;
+			}
 			break;
 		case 4:
-			y++;
+			//ANDA
+			if (y <= altoPantalla-h)
+			{
+				y = y + 0.5;
+			}
+			else
+			{
+				diley = 150;
+			}
 
 	}
+}
+void Enemigo::setDiley(int _diley)
+{
+	diley = _diley;
+}
+int Enemigo::getDiley()
+{
+	return diley;
+}
+void Enemigo::setAnchoPantalla(float _anchoPantalla)
+{
+	anchoPantalla = _anchoPantalla;
+}
+float Enemigo::getAnchoPantalla()
+{
+	return anchoPantalla;
 }

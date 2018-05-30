@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 	ALLEGRO_TIMER *timer = NULL;
 
 	Jugador *player = new Jugador();
-	Enemigo *Enemy = new Enemigo(200,200,36,38);
+	Enemigo *Enemy = new Enemigo(200,200,36,38,widthPantalla, heightPantalla);
 	
 	//  Inicia allegro5, esto es necesario para realizar cualquier
 	//  función de allegro
