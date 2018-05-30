@@ -11,6 +11,7 @@
 #include "Enemigo.h"
 using namespace std;
 int main(int argc, char** argv) {
+	const float FPS = 60;
 	bool gameOver = false;
 	//  Crea un puntero a un ALLEGRO_DISPLAY
 	ALLEGRO_DISPLAY* ventana;
@@ -19,6 +20,7 @@ int main(int argc, char** argv) {
 	float heightPantalla = 600;
 	ALLEGRO_BITMAP  *bitmapGameOver = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue;
+	ALLEGRO_TIMER *timer = NULL;
 
 	Jugador *player = new Jugador();
 	Enemigo *Enemy = new Enemigo(200,200,36,38);
@@ -26,7 +28,13 @@ int main(int argc, char** argv) {
 	//  Inicia allegro5, esto es necesario para realizar cualquier
 	//  función de allegro
 	al_init();
+	timer = al_create_timer(1.0 / FPS);
+	if (!timer) {
+		fprintf(stderr, "failed to create timer!\n");
+		return -1;
+	}
 	event_queue = al_create_event_queue();
+	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 	al_init_primitives_addon();
 	al_install_keyboard();
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
@@ -73,6 +81,7 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 	//game loop
+	al_start_timer(timer);
 	while (!gameOver) {
 		//  La siguiente función limpia el buffer, con un color determinado, 
 		//  recibe como parámetro un ALLEGRO_COLOR. 
@@ -141,7 +150,7 @@ int main(int argc, char** argv) {
 	//  esto eliminará a la ventana de la memoria.
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);
-	
+	al_destroy_timer(timer);
 	delete player;
 	return 0;
 }
