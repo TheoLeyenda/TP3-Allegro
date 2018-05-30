@@ -1,6 +1,5 @@
 #include <cstdlib>
 //Incluimos las funciones básicas de Allegro
-//#include <allegro5/allegro.h>
 #include <iostream>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
