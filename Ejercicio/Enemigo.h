@@ -6,6 +6,8 @@
 #include "allegro5/allegro_image.h"
 #include "allegro5/allegro_native_dialog.h"
 #include "allegro5/allegro_primitives.h"
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 class Enemigo
 {
@@ -15,6 +17,7 @@ private:
 	float y;
 	float h;
 	float w;
+	int direcion;
 public:
 	Enemigo();
 	Enemigo(float _x, float _y, float _w, float _h);
@@ -32,6 +35,7 @@ public:
 	void setW(float _w);
 	float getH();
 	float getW();
+	void movimiento();
 
 
 };

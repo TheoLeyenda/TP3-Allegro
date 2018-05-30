@@ -114,13 +114,17 @@ bool Jugador::colicionEnemigo(float W_enemy, float H_enemy,float X_enemy, float 
 	if ((x > X_enemy && x<X_enemy + W_enemy && y > Y_enemy && y < Y_enemy + H_enemy) || (x > X_enemy && x < X_enemy + W_enemy && y+w > Y_enemy && y+w < Y_enemy + H_enemy))
 	{
 		cout << "Derecha" << endl;
+		return true;
 	}
 	if ((x > X_enemy-W_enemy && x<X_enemy && y > Y_enemy && y < Y_enemy + H_enemy) || (x > X_enemy - W_enemy && x < X_enemy  && y + w > Y_enemy && y + w < Y_enemy + H_enemy))
 	{
 		cout << "izquierda" << endl;
+		return true;
 	}
 	if (y+h > Y_enemy && y+h < Y_enemy + H_enemy && x > X_enemy && x < X_enemy + W_enemy || y + h > Y_enemy && y + h < Y_enemy+ H_enemy && x+w > X_enemy && x+w < X_enemy + W_enemy)
 	{
 		cout << "Arriba" << endl;
+		return true;
 	}
+	return false;
 }

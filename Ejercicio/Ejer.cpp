@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 	ALLEGRO_DISPLAY *display = NULL;
 	float widthPantalla = 800;
 	float heightPantalla = 600;
-	//ALLEGRO_BITMAP  *jugador1 = NULL;
+	ALLEGRO_BITMAP  *bitmapGameOver = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue;
 
 	Jugador *player = new Jugador();
@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	//jugador1 = al_load_bitmap("../Sprite/JugadoOP1.png");
+	bitmapGameOver = al_load_bitmap("../Sprite/gameOver.png");
 	player->loadImage();
 	Enemy->loadImage();
 	if (!player->CheckLoadImage(display))
@@ -58,7 +58,20 @@ int main(int argc, char** argv) {
 		al_destroy_display(display);
 		return 0;
 	}
-
+	if (!Enemy->CheckLoadImage(display))
+	{
+		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
+			NULL, ALLEGRO_MESSAGEBOX_ERROR);
+		al_destroy_display(display);
+		return 0;
+	}
+	if (!bitmapGameOver)
+	{
+		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
+			NULL, ALLEGRO_MESSAGEBOX_ERROR);
+		al_destroy_display(display);
+		return 0;
+	}
 	//game loop
 	while (!gameOver) {
 		//  La siguiente función limpia el buffer, con un color determinado, 
@@ -78,34 +91,51 @@ int main(int argc, char** argv) {
 		//  Esto es porque el buffer ahora tiene lo que estaba detrás de la
 		//  ventana. Luego veremos como redibujar la ventana cuando se realice
 		//  un evento.
+		Enemy->movimiento();
 		al_flip_display();
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
-
 		switch (ev.keyboard.keycode)
 		{
-			case ALLEGRO_KEY_UP:
-				player->setY(player->getY() - 2);
-				player->setImage(1);
-				break;
-			case ALLEGRO_KEY_DOWN:
-				player->setY(player->getY() + 2);
-				player->setImage(4);
-				break;
-			case ALLEGRO_KEY_LEFT:
-				player->setX(player->getX() - 2);
-				player->setImage(3);
-				break;
-			case ALLEGRO_KEY_RIGHT:
-				player->setX(player->getX() + 2);
-				player->setImage(2);
-				break;
+		case ALLEGRO_KEY_UP:
+			player->setY(player->getY() - 2);
+			player->setImage(1);
+			break;
+		case ALLEGRO_KEY_DOWN:
+			player->setY(player->getY() + 2);
+			player->setImage(4);
+			break;
+		case ALLEGRO_KEY_LEFT:
+			player->setX(player->getX() - 2);
+			player->setImage(3);
+			break;
+		case ALLEGRO_KEY_RIGHT:
+			player->setX(player->getX() + 2);
+			player->setImage(2);
+			break;
 		}
 		//coluciones
 		if (player->colicionEnemigo(Enemy->getW(), Enemy->getH(), Enemy->getX(), Enemy->getY()))
 		{
-
+			gameOver = true;
 		}
+	}
+	gameOver = false;
+	while (!gameOver)
+	{
+		
+		al_clear_to_color(al_map_rgb(0, 0, 0));
+		ALLEGRO_EVENT ev;
+		al_wait_for_event(event_queue, &ev);
+		al_draw_bitmap(bitmapGameOver, 0, 0, 0);
+		switch (ev.keyboard.keycode)
+		{
+			case ALLEGRO_KEY_ENTER:
+				gameOver = true;
+				cout << "Entre" << endl;
+			break;
+		}
+		al_flip_display();
 	}
 	//  No olvidarnos de eliminar el contenido bajo el puntero de ventana,
 	//  esto eliminará a la ventana de la memoria.
