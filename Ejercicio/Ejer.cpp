@@ -107,20 +107,36 @@ int main(int argc, char** argv) {
 		switch (ev.keyboard.keycode)
 		{
 		case ALLEGRO_KEY_UP:
-			player->setY(player->getY() - 2);
-			player->setImage(1);
+			//ANDA
+			if (player->getY() > 0)
+			{
+				player->setY(player->getY() - 2);
+				player->setImage(1);
+			}
 			break;
 		case ALLEGRO_KEY_DOWN:
-			player->setY(player->getY() + 2);
-			player->setImage(4);
+			//ANDA
+			if (player->getY() < heightPantalla - player->getH())
+			{
+				player->setY(player->getY() + 2);
+				player->setImage(4);
+			}
 			break;
 		case ALLEGRO_KEY_LEFT:
-			player->setX(player->getX() - 2);
-			player->setImage(3);
+			//ANDA
+			if (player->getX() > 0)
+			{
+				player->setX(player->getX() - 2);
+				player->setImage(3);
+			}
 			break;
 		case ALLEGRO_KEY_RIGHT:
-			player->setX(player->getX() + 2);
-			player->setImage(2);
+			//ANDA
+			if (player->getX() < widthPantalla - player->getH())
+			{
+				player->setX(player->getX() + 2);
+				player->setImage(2);
+			}
 			break;
 		}
 		//coluciones
